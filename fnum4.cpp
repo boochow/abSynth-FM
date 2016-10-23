@@ -13,7 +13,7 @@
 //
 #if (F_CPU == 16000000UL)
 //
-const PROGMEM prog_uint16_t fnum4[48] = {
+const uint16_t PROGMEM fnum4[48] = {
 /* ****  C  ( 4.0880 Hz) **** */
    0x224b, 0x22ca, 0x234c, 0x23cf,
 /* ****  C# ( 4.3311 Hz) **** */

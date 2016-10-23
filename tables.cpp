@@ -2,7 +2,7 @@
 //
 // Operator mult code to actual multiplier conversion
 //
-const PROGMEM prog_uint8_t mult_tab[16] = {
+const uint8_t PROGMEM mult_tab[16] = {
 // code:       0   1  2  3  4   5   6   7   8   9  10  11  12  13  14  15
 // multiplier: 0.5 1  2  3  4   5   6   7   8   9  10  10  12  12  15  15
                1,  2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 20, 24, 24, 30, 30
@@ -10,7 +10,7 @@ const PROGMEM prog_uint8_t mult_tab[16] = {
 //
 // MIDInote to oct-keycode table
 //
-const PROGMEM prog_uint8_t octkey[32] = {
+const uint8_t PROGMEM octkey[32] = {
     0x00, 0x04, 0x08, 0x10, 0x14, 0x18, 0x20, 0x24, 
     0x28, 0x30, 0x34, 0x38, 0x40, 0x44, 0x48, 0x50, 
     0x54, 0x58, 0x60, 0x64, 0x68, 0x70, 0x74, 0x78, 
@@ -20,7 +20,7 @@ const PROGMEM prog_uint8_t octkey[32] = {
 // 512 point sine table
 // only first 129 points (0..pi/2) for symmetry
 //
-const PROGMEM prog_uint8_t slbtab[129] = {
+const uint8_t PROGMEM slbtab[129] = {
     0xff, 0x65, 0x55, 0x4c, 0x45, 0x40, 0x3c, 0x38, 
     0x35, 0x32, 0x30, 0x2e, 0x2c, 0x2a, 0x28, 0x27, 
     0x25, 0x24, 0x23, 0x21, 0x20, 0x1f, 0x1e, 0x1d, 
@@ -43,7 +43,7 @@ const PROGMEM prog_uint8_t slbtab[129] = {
 // convert log2 value to linear value (Q15)
 // LIN = lb2lin[LB] = 2**(-LB/16)
 //
-const PROGMEM prog_int16_t lb2lin[256] = {
+const int16_t PROGMEM lb2lin[256] = {
   0x7f00, 0x799e, 0x7476, 0x6f86, 0x6acb, 0x6644, 0x61ee, 0x5dc7, 
   0x59cd, 0x55ff, 0x5259, 0x4edc, 0x4b84, 0x4850, 0x453f, 0x4250, 
   0x3f80, 0x3ccf, 0x3a3b, 0x37c3, 0x3566, 0x3322, 0x30f7, 0x2ee4, 

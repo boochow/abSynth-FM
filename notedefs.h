@@ -1,4 +1,4 @@
-#include "fmtg.h"
+//#include "fmtg.h"
 //
 // MIDI note number define
 // unusually, "C0" stants for lowest MIDI note (0)

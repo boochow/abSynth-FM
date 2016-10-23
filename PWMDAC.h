@@ -20,7 +20,7 @@
 //
 // PWM DAC pin define
 //
-#define PWMDAC_PIN (9)
+#define PWMDAC_PIN (13)
 //
 // sample update timing flag
 //

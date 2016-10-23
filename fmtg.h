@@ -43,21 +43,21 @@
 //
 // Operator mult code to actual multiplier conversion
 //
-extern const PROGMEM prog_uint8_t mult_tab[];
+extern const uint8_t PROGMEM mult_tab[];
 //
 // MIDInote to oct-keycode table
 //
-extern const PROGMEM prog_uint8_t octkey[];
+extern const uint8_t PROGMEM octkey[];
 // 
 // 512 point sine table in log_binary value
 // only first 129 points (0..pi/2) for symmetry
 //
-extern const PROGMEM prog_uint8_t slbtab[];
+extern const uint8_t PROGMEM slbtab[];
 //
 // convert log2 value to linear value (Q15)
 // LIN = lb2lin[LB] = 2**(-LB/16)
 //
-extern const PROGMEM prog_int16_t lb2lin[];
+extern const int16_t PROGMEM lb2lin[];
 //
 /*****************************************************/
 /*                                                   */
@@ -70,7 +70,7 @@ extern const PROGMEM prog_int16_t lb2lin[];
 /*                                                   */
 /*****************************************************/
 //
-extern const PROGMEM prog_uint16_t fnum4[];
+extern const uint16_t PROGMEM fnum4[];
 //
 // FM operator class definition
 //
