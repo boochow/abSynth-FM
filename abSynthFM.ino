@@ -718,9 +718,8 @@ void setup() {
 }
 
 void loop() {
-  if (update_synth(g_fm_operator))
+  if (update_synth(g_fm_operator)){
     update_seq(&g_sequencer, g_fm_operator);
-  else {
     if (!(arduboy.nextFrame()))
       return;
 
