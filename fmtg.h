@@ -92,6 +92,7 @@ class FMop {
       FMop(void);      // constructor
       int16_t  calc(int32_t mod_in); // operator calcuration at fs rate
       void     eg_update(void);      // EG update at 1 ms rate
+      void     mute(void);           // set sound level to EG_MIN_VAL
       void     gate_on (int8_t notenum, int8_t vel); // GATE ON
 }; // class FMop
 #endif

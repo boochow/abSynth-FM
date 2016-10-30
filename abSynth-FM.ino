@@ -1,9 +1,13 @@
+//comment out #include "FMop.h"
+//#include "FMop.h"
 #include "notedefs.h"
 #include "FMSynth.h"
 #include "Arduboy2.h"
 Arduboy2 arduboy;
 
-#define DUR_UNIT (39040 / 2)
+#define DUR_UNIT (39136 / 2)
+//comment out DUR_UNIT (1000)
+//#define DUR_UNIT (1000)
 
 #define DRAW_PIXEL(x,y,c)    arduboy.drawPixel((x), (y), (c));
 #define GET_PIXEL(x,y)      arduboy.getPixel((x), (y))
@@ -175,18 +179,31 @@ const unsigned char PROGMEM sequencer_img[] =
 
 const uint8_t panel[] PROGMEM =
 {
-  //width = 69, height = 16
-  0x7f, 0xff, 0xff, 0xe0, 0xee, 0xe0, 0xff, 0xe0, 0xf1, 0xe0, 0x7f, 0x60, 0xea, 0xee, 0x7f, 0xff,
-  0x7f, 0xff, 0x7f, 0xff, 0x60, 0xfa, 0x60, 0x7f, 0x60, 0xef, 0xef, 0xff, 0xe0, 0xef, 0xef, 0xff,
-  0xff, 0x7f, 0xff, 0x7f, 0xff, 0xff, 0xe0, 0xee, 0xe0, 0xff, 0xe0, 0xf1, 0x60, 0xff, 0xe0, 0xea,
-  0x6e, 0x7f, 0x7f, 0xff, 0x7f, 0x7f, 0x7f, 0xe0, 0x7a, 0x60, 0xff, 0xe0, 0xef, 0xef, 0xff, 0xe0,
-  0xef, 0xef, 0xff, 0xff, 0x3f, 0x0c, 0x0d, 0x0d, 0x0d, 0x0d, 0x0d, 0x0d, 0x0d, 0x0d, 0x0f, 0x00,
-  0x07, 0x08, 0x0f, 0x00, 0x07, 0x00, 0x0f, 0x00, 0x0c, 0x00, 0x0f, 0x00, 0x0d, 0x0c, 0x0f, 0x0d,
-  0x0d, 0x0d, 0x0d, 0x0d, 0x0d, 0x0d, 0x0c, 0x0f, 0x0c, 0x0d, 0x0d, 0x0d, 0x0d, 0x0d, 0x0d, 0x0d,
-  0x0f, 0x00, 0x07, 0x07, 0x0f, 0x00, 0x07, 0x00, 0x0f, 0x00, 0x0d, 0x00, 0x0f, 0x00, 0x07, 0x08,
-  0x0f, 0x0d, 0x0d, 0x0d, 0x0d, 0x0d, 0x0d, 0x0d, 0x0d, 0x0c,
+  //width = 68, height = 12
+  0x7f, 0xe0, 0xee, 0xe0, 0xff, 0xe0, 0x71, 0x60, 0xff, 0xe0, 0x6a, 0xee, 0x7f, 0xff, 0x7f, 0xe0,
+  0x7a, 0xe0, 0x7f, 0x60, 0x6f, 0xef, 0xff, 0xe0, 0xef, 0xef, 0x7f, 0xff, 0x7f, 0xe0, 0xee, 0xe0,
+  0xff, 0xe0, 0x71, 0xe0, 0xff, 0xe0, 0x6a, 0x6e, 0x7f, 0xff, 0x7f, 0x60, 0x7a, 0xe0, 0x7f, 0x60,
+  0xef, 0xef, 0xff, 0xe0, 0xef, 0xef, 0x7f, 0xff, 0xff, 0x68, 0xea, 0x62, 0xff, 0x60, 0x7a, 0x60,
+  0xff, 0x70, 0xef, 0x70, 0x0c, 0x0d, 0x0d, 0x0d, 0x0d, 0x0f, 0x00, 0x07, 0x08, 0x0f, 0x00, 0x07,
+  0x00, 0x0f, 0x00, 0x0c, 0x00, 0x0f, 0x00, 0x0d, 0x0c, 0x0f, 0x0d, 0x0d, 0x0d, 0x0d, 0x0c, 0x0f,
+  0x0c, 0x0d, 0x0d, 0x0d, 0x0d, 0x0f, 0x00, 0x07, 0x07, 0x0f, 0x00, 0x07, 0x00, 0x0f, 0x00, 0x0d,
+  0x00, 0x0f, 0x00, 0x07, 0x08, 0x0f, 0x0d, 0x0d, 0x0d, 0x0d, 0x0c, 0x0f, 0x0f, 0x00, 0x0c, 0x00,
+  0x0f, 0x00, 0x05, 0x05, 0x0f, 0x00, 0x0c, 0x00,
 };
 
+const uint8_t cancelbutton[] PROGMEM =
+{
+  //width = 27, height = 8
+  0x00, 0x7e, 0x66, 0x5a, 0x5a, 0x7e, 0x42, 0x6a, 0x42, 0x7e, 0x42, 0x66, 0x42, 0x7e, 0x66, 0x5a,
+  0x5a, 0x7e, 0x42, 0x52, 0x5a, 0x7e, 0x42, 0x5e, 0x5e, 0x7e, 0x00,
+};
+
+const uint8_t waitingmsg[] PROGMEM =
+{
+  //width = 29, height = 8
+  0xff, 0xe0, 0xf3, 0xe0, 0xff, 0xe0, 0xfa, 0xe0, 0xff, 0xe0, 0xff, 0xfe, 0xe0, 0xfe, 0xff, 0xe0,
+  0xff, 0xe0, 0xf1, 0xe0, 0xff, 0xf1, 0xee, 0xe2, 0xff, 0xef, 0xff, 0xef, 0xff,
+};
 
 
 const int8_t dial_x[32] PROGMEM =
@@ -254,7 +271,8 @@ const char progname[NUM_INST][16] PROGMEM = {
 #define PatDumpAll  18
 #define PatLoad1  19
 #define PatLoadAll  20
-#define PatLast   21
+#define PatSave   21
+#define PatLast   22
 
 const uint8_t selectorindicator[8][4] PROGMEM = {
   { 0, 0, 0, 0 },
@@ -287,7 +305,8 @@ struct SynthNumericParam g_params[5] =
 enum Mode {
   Synthesizer,
   Sequencer,
-  Pattern
+  Pattern,
+  Communication
 } g_mode, g_prev_mode;
 
 #define SEQ_LEN (16)
@@ -295,29 +314,100 @@ enum Mode {
 
 #define MAXNOTE (84)
 #define MINNOTE (M_C4)
+#define M_TIE (-2)
+
+#define MAXTEMPO (240)
+#define MINTEMPO (56)
+
+#define MAXTRANSPOSE  (2)
+#define MINTRANSPOSE  (-2)
+
 
 const int8_t song01[SEQ_LEN] PROGMEM =
 {
   M_C5, M_C5, M_G5, M_G5,
-  M_A5, M_A5, M_G5, M_REST,
+  M_A5, M_A5, M_G5, M_TIE,
   M_F5, M_F5, M_E5, M_E5,
-  M_D5, M_D5, M_C5, M_REST
+  M_D5, M_D5, M_C5, M_TIE
 };
 const int8_t song02[SEQ_LEN] PROGMEM =
 {
   M_G5, M_G5, M_F5, M_F5,
-  M_E5, M_E5, M_D5, M_REST,
+  M_E5, M_E5, M_D5, M_TIE,
   M_G5, M_G5, M_F5, M_F5,
-  M_E5, M_E5, M_D5, M_REST,
+  M_E5, M_E5, M_D5, M_TIE,
+};
+const int8_t song03[SEQ_LEN] PROGMEM =
+{
+0x40, 0x40, 0x40, 0xFE, 
+0x40, 0x40, 0x40, 0xFE, 
+0x40, 0x43, 0x3C, 0x3E, 
+0x40, 0xFE, 0xFF, 0xFF,
+};
+const int8_t song04[SEQ_LEN] PROGMEM =
+{
+0x41, 0x41, 0x41, 0x41, 
+0x41, 0x40, 0x40, 0x40, 
+0x40, 0x3E, 0x3E, 0x40, 
+0x3E, 0xFF, 0x43, 0xFE,
+};
+const int8_t song05[SEQ_LEN] PROGMEM =
+{
+0x41, 0x41, 0x41, 0x41, 
+0x41, 0x40, 0x40, 0x40, 
+0x43, 0x43, 0x41, 0x3E, 
+0x3C, 0xFF, 0xFF, 0xFF
+};
+const int8_t song06[SEQ_LEN] PROGMEM =
+{
+0x40, 0x3C, 0x3E, 0x37, 
+0xFE, 0xFE, 0x37, 0x3E, 
+0x40, 0x3C, 0xFE, 0xFE, 
+0xFE, 0xFE, 0xFE, 0xFE
+};
+const int8_t song07[SEQ_LEN] PROGMEM =
+{
+0x43, 0x43, 0x43, 0x43, 
+0xFF, 0x46, 0x46, 0x46, 
+0x46, 0xFF, 0x46, 0x46, 
+0xFF, 0x46, 0x46, 0x46
+};
+const int8_t song08[SEQ_LEN] PROGMEM =
+{
+0x3C, 0x48, 0x3C, 0x45, 
+0x3C, 0x41, 0x3C, 0x43, 
+0x3C, 0x48, 0x3C, 0x4A, 
+0x3C, 0x47, 0x3C, 0x48
+};
+const int8_t song09[SEQ_LEN] PROGMEM =
+{
+  M_E4, M_A4, M_C5, M_A5,
+  M_B4, M_Eb5, M_G5, M_Eb5,
+  M_Gb5, M_TIE, M_E5, M_TIE,
+  M_B4, M_TIE, M_G4, M_TIE,
 };
 const int8_t song10[SEQ_LEN] PROGMEM =
 {
-  M_C5, M_REST, M_REST, M_C5,
-  M_G5, M_REST, M_REST, M_G5,
-  M_A5, M_REST, M_REST, M_A5,
-  M_F5, M_REST, M_REST, M_F5,
+0x43, 0x43, 0x43, 0x43, 
+0x40, 0xFE, 0x40, 0xFE, 
+0x3E, 0xFE, 0x3E, 0xFE, 
+0x40, 0xFE, 0x40, 0xFE
+};
+const int8_t song11[SEQ_LEN] PROGMEM =
+{
+  M_C5, M_C5, M_REST, M_C5,
+  M_G5, M_G5, M_REST, M_G5,
+  M_A5, M_TIE, M_C5, M_A5,
+  M_F5, M_TIE, M_A5, M_F5,
 };
 const int8_t song12[SEQ_LEN] PROGMEM =
+{
+0x3C, 0x3E, 0x40, 0x42, 
+0x44, 0x46, 0x48, 0x4A, 
+0x4C, 0x4A, 0x48, 0x46, 
+0x44, 0x42, 0x40, 0x3E
+};
+const int8_t song13[SEQ_LEN] PROGMEM =
 {
   M_D5, M_D5, M_D5, M_D5,
   M_D5, M_D5, M_D5, M_D5,
@@ -326,28 +416,37 @@ const int8_t song12[SEQ_LEN] PROGMEM =
 };
 const int8_t song14[SEQ_LEN] PROGMEM =
 {
-  M_E4, M_REST, M_A5, M_REST,
-  M_E4, M_REST, M_A5, M_E4,
-  M_E4, M_REST, M_A5, M_REST,
-  M_E4, M_REST, M_A5, M_A5
+0x3C, 0xFE, 0xFE, 0x3C, 
+0xFF, 0x37, 0x37, 0x37, 
+0x3C, 0xFE, 0xFE, 0x3C, 
+0xFF, 0xFF, 0x3C, 0x3F
 };
 const int8_t song15[SEQ_LEN] PROGMEM =
 {
   M_E4, M_REST, M_A5, M_REST,
-  M_E4, M_A5, M_E4, M_A5,
-  M_REST, M_E4, M_A5, M_E4,
-  M_Db6, M_A5, M_F5, M_F5
+  M_E4, M_REST, M_A5, M_E4,
+  M_REST, M_E4, M_A5, M_REST,
+  M_E4, M_REST, M_A5, M_E4
 };
+const int8_t song16[SEQ_LEN] PROGMEM =
+{
+0x34, 0xFF, 0x45, 0xFF, 
+0x34, 0xFF, 0x45, 0x34, 
+0xFF, 0x34, 0x45, 0x34, 
+0x45, 0x45, 0x34, 0x44
+};
+
 struct Sequencer {
   uint8_t synth_param[5];
+  int8_t notes[SEQ_LEN];
   uint8_t tempo = 120;
+  int8_t transpose = 0;
+  uint8_t flags = 0x80; //reserved
   uint8_t pos = 0;
   uint8_t prev = 0;
   uint8_t prev2 = 0;
-  int8_t transpose = 0;
   int16_t dur_cnt = 0;
   bool  playing = true;
-  int8_t notes[SEQ_LEN];
 }g_sequencer[SEQ_NUM];
 
 uint8_t g_seq_cur = 0;
@@ -356,11 +455,136 @@ uint8_t g_seq_nxt = 0;
 int8_t g_selector_syn;
 int8_t g_selector_seq;
 int8_t g_selector_pat;
+int8_t g_command_com;
 
 bool g_blink_state;
 uint8_t g_blinkcount;
 int8_t g_program;
 FMop g_fm_operator[2];
+
+
+#define EEPROM_TOP  (EEPROM_STORAGE_SPACE_START + 256)
+#define EEPROM_SIG  (EEPROM_TOP)
+#define EEPROM_VER  (EEPROM_TOP+4)
+#define EEPROM_NSEQ (EEPROM_TOP+5)
+#define EEPROM_PAT  (EEPROM_TOP+6)
+#define SIGNATURE "abFM"
+#define VERSION   (1)
+
+#define EEPROM_SEQ_SIZE (24)
+
+bool check_eeprom() {
+  char sig[4];
+  sig[0] = EEPROM.read(EEPROM_SIG);
+  sig[1] = EEPROM.read(EEPROM_SIG + 1);
+  sig[2] = EEPROM.read(EEPROM_SIG + 2);
+  sig[3] = EEPROM.read(EEPROM_SIG + 3);
+  return (memcmp(sig, SIGNATURE, 4) == 0);
+}
+
+void regulate_seq(struct Sequencer *s) {
+  s->tempo = max(s->tempo, MINTEMPO);
+  s->tempo = min(s->tempo, MAXTEMPO);
+  s->transpose = max(s->transpose, MINTRANSPOSE);
+  s->transpose = min(s->transpose, MAXTRANSPOSE);
+  for (uint8_t i = 0; i < 5; i++)
+    s->synth_param[i] = min(s->synth_param[i], g_params[i].max);
+  for (uint8_t j = 0; j < SEQ_LEN; j++) {
+    int8_t n = s->notes[j];
+    if ((MINNOTE > n) && (n >= 0))
+      s->notes[j] = MINNOTE;
+    else if (n > MAXNOTE)
+      s->notes[j] = MAXNOTE;
+  }
+  s->flags = 0x80; //reserved
+}
+
+void read_seq_from_eeprom(struct Sequencer *s, uint16_t index) {
+  for (uint8_t i = 0; i < EEPROM_SEQ_SIZE; i++)
+    *((uint8_t *)s + i) = EEPROM.read(index + i);
+  regulate_seq(s);
+}
+
+bool read_eeprom() {
+  if (!check_eeprom())
+    return false;
+  if (EEPROM.read(EEPROM_VER) > VERSION)
+    return false;
+
+  uint8_t nseq = EEPROM.read(EEPROM_NSEQ);
+  if (nseq > SEQ_NUM) nseq = SEQ_NUM;
+  for (uint8_t i = 0; i < nseq; i++)
+    read_seq_from_eeprom(&g_sequencer[i], EEPROM_PAT + i * EEPROM_SEQ_SIZE);
+  return true;
+}
+
+void write_seq_to_eeprom(struct Sequencer *s, uint16_t index) {
+  for (uint8_t i = 0; i < EEPROM_SEQ_SIZE; i++)
+    EEPROM.update(index + i, *((byte *)s + i));
+}
+
+void write_eeprom() {
+  EEPROM.update(EEPROM_TOP, SIGNATURE[0]);
+  EEPROM.update(EEPROM_TOP + 1, SIGNATURE[1]);
+  EEPROM.update(EEPROM_TOP + 2, SIGNATURE[2]);
+  EEPROM.update(EEPROM_TOP + 3, SIGNATURE[3]);
+  EEPROM.update(EEPROM_VER, VERSION);
+  EEPROM.update(EEPROM_NSEQ, SEQ_NUM);
+  for (uint8_t i = 0; i < SEQ_NUM; i++)
+    write_seq_to_eeprom(&g_sequencer[i], EEPROM_PAT + i * EEPROM_SEQ_SIZE);
+}
+
+void draw_communication() {
+  DRAW_RECT(39, 19, 49, 23, BLACK);
+  FILL_RECT(40, 20, 47, 21, WHITE);
+  FILL_RECT(49, 24, 29, 8, BLACK);
+  DRAW_BITMAP(49, 24, waitingmsg, 29, 8, WHITE);
+  FILL_RECT(50, 32, 27, 8, BLACK);
+  DRAW_BITMAP(50, 32, cancelbutton, 27, 8, WHITE);
+}
+
+void serial_print_hex_2(uint8_t n) {
+  if (n < 0x10)
+    Serial.print("0");
+  Serial.print(n, HEX);
+  Serial.print(" ");
+}
+void dump_seq_header(uint8_t nseq) {
+  serial_print_hex_2(SIGNATURE[0]);
+  serial_print_hex_2(SIGNATURE[1]);
+  serial_print_hex_2(SIGNATURE[2]);
+  serial_print_hex_2(SIGNATURE[3]);
+  serial_print_hex_2(VERSION);
+  serial_print_hex_2(nseq);
+}
+
+void dump_seq_to_serial(struct Sequencer *s) {
+  for (uint8_t i = 0; i < EEPROM_SEQ_SIZE; i++)
+    serial_print_hex_2(*((byte *)s + i));
+}
+
+void dump_seq_one() {
+  Serial.begin(9600);
+  while(!Serial);
+  dump_seq_header(1);
+  Serial.println();
+  dump_seq_to_serial(&g_sequencer[g_seq_cur]);
+  Serial.println();
+  Serial.end();
+}
+
+void dump_seq_all() {
+  Serial.begin(9600);
+  while(!Serial);
+  dump_seq_header(SEQ_NUM);
+  Serial.println();
+  for(uint8_t i = 0; i < SEQ_NUM; i++) {
+    dump_seq_to_serial(&g_sequencer[i]);
+    Serial.println();
+  }
+  Serial.end();
+}
+
 
 void blink_indicator_syn(uint8_t s) {
   g_blink_state = !g_blink_state;
@@ -373,11 +597,17 @@ void blink_indicator_syn(uint8_t s) {
 }
 
 void copy_param_to_synth(FMop op[2]) {
-  op[0].FB = g_sequencer[g_seq_cur].synth_param[0];
-  op[0].MULT = g_sequencer[g_seq_cur].synth_param[1];
-  op[0].TL = g_sequencer[g_seq_cur].synth_param[2];
-  op[0].DR = g_sequencer[g_seq_cur].synth_param[3];
-  op[1].DR = g_sequencer[g_seq_cur].synth_param[4];
+  uint8_t *p = g_sequencer[g_seq_cur].synth_param;
+  for (uint8_t i = 0; i < 5; i++) {
+    if (p[i] > g_params[i].max) {
+      p[i] = g_params[i].max;
+    }
+  }
+  op[0].FB = p[0];
+  op[0].MULT = p[1];
+  op[0].TL = p[2];
+  op[0].DR = p[3];
+  op[1].DR = p[4];
 }
 
 void draw_dial(uint8_t value, struct SynthNumericParam *p, uint8_t color) {
@@ -410,7 +640,6 @@ void set_program(int8_t p) {
   for (uint8_t i = 0; i < 5; i++) {
     set_param(param + i, &g_params[i], preset_progs[p][i]);
   }
-  copy_param_to_synth(g_fm_operator);
 }
 
 void set_selector_syn(int8_t s) {
@@ -543,18 +772,22 @@ void draw_seq_marker(struct Sequencer *s, uint8_t n) {
 
 void draw_seq_slider(struct Sequencer *s, uint8_t n) {
   const static uint8_t line[5] PROGMEM = { 2, 2, 2, 2, 2 };
+  const static uint8_t tie[5] PROGMEM = { 0, 2, 7, 2, 0 };
+  uint8_t x = 1 + 8 * n;
 
   if (s->notes[n] > M_REST) {
-    uint8_t x = 1 + 8 * n;
     uint8_t y = 24 + (MAXNOTE - s->notes[n]);
     DRAW_BITMAP(x, y, line, 5, 3, 3);
+  }
+  else if (s->notes[n] == M_TIE) {
+    DRAW_BITMAP(x, 24 + 17, tie, 5, 3, 3);
   }
 }
 
 void change_tempo(uint8_t delta) {
   uint8_t t = g_sequencer[g_seq_cur].tempo += delta;
-  if (t > 240) t = 240;
-  if (t < 56) t = 56;
+  if (t > MAXTEMPO) t = MAXTEMPO;
+  if (t < MINTEMPO) t = MINTEMPO;
   FILL_RECT(8, 2, 18, 7, WHITE);
   if (t > 99) {
     G_DRAWCHAR(8, 2, '0' + t / 100, BLACK);
@@ -565,19 +798,20 @@ void change_tempo(uint8_t delta) {
 
 void change_trans(int8_t delta) {
   int8_t t = g_sequencer[g_seq_cur].transpose + delta;
-  if (t > 2) t = 2;
-  if (t < -2) t = -2;
+  if (t > MAXTRANSPOSE) t = MAXTRANSPOSE;
+  if (t < MINTRANSPOSE) t = MINTRANSPOSE;
   draw_transpose_slider(&g_sequencer[g_seq_cur]);
   g_sequencer[g_seq_cur].transpose = t;
   draw_transpose_slider(&g_sequencer[g_seq_cur]);
 }
 
 void play_cur_note(struct Sequencer *s, FMop op[2]) {
-  if (M_REST < s->notes[s->pos]) {
-    for (uint8_t i = 0; i < 2; i++) {
+  if (M_REST < s->notes[s->pos])
+    for (uint8_t i = 0; i < 2; i++)
       op[i].gate_on(s->notes[s->pos] + s->transpose * 12, 127);
-    }
-  }
+  else if (M_REST == s->notes[s->pos])
+    for (uint8_t i = 0; i < 2; i++)
+      op[i].mute();
 }
 
 void change_note(int8_t delta) {
@@ -585,13 +819,15 @@ void change_note(int8_t delta) {
   int8_t n = g_sequencer[g_seq_cur].notes[idx];
   int8_t n2 = n + delta;
 
-  if ((n <= M_REST) && (delta > 0))
+  if ((n == M_REST) && (delta > 0))
     n2 = MINNOTE;
-  if ((n <= M_REST) && (delta < 0))
+  if ((n <= M_TIE) && (delta < 0))
     n2 = MAXNOTE;
   if (n > M_REST) {
-    if ((n2 < MINNOTE) || (n2 > MAXNOTE))
+    if (n2 < MINNOTE)
       n2 = M_REST;
+    else if (n2 > MAXNOTE)
+      n2 = M_TIE;
   }
 
   if (idx == g_sequencer[g_seq_cur].prev2)
@@ -645,6 +881,11 @@ void set_selector_seq(int8_t s) {
   }
 }
 
+void finish_seq(struct Sequencer *s) {
+  s->pos = SEQ_LEN;
+  s->dur_cnt = 0;
+}
+
 bool update_seq(struct Sequencer *s, FMop op[2]) {
   bool done = false;
   if (s->playing) {
@@ -664,25 +905,28 @@ bool update_seq(struct Sequencer *s, FMop op[2]) {
 
 void blink_indicator_pat(uint8_t s) {
   g_blink_state = !g_blink_state;
-  if ((PatLast > s) && (s >= Pat01)) {
+  if ((Pat16 >= s) && (s >= Pat01)) {
     uint8_t x = 29 + ((s - 1) % 4) * 17;
     uint8_t y = 5 + ((s - 1) / 4) * 10;
-    uint8_t h = 11;
 
-    if (s > Pat16) {
-      y += 2;
-      h = 7;
-    }
     if (g_blink_state)
-      DRAW_RECT(x, y, 18, h, BLACK);
+      DRAW_RECT(x, y, 18, 11, BLACK);
     else {
-      DRAW_RECT(x, y, 18, h, WHITE);
-      if (s <= Pat16) {
-        DRAW_PIXEL(x, y, BLACK);
-        DRAW_PIXEL(x + 17, y, BLACK);
-        DRAW_PIXEL(x, y + 10, BLACK);
-        DRAW_PIXEL(x + 17, y + 10, BLACK);
-      }
+      DRAW_RECT(x, y, 18, 11, WHITE);
+      DRAW_PIXEL(x, y, BLACK);
+      DRAW_PIXEL(x + 17, y, BLACK);
+      DRAW_PIXEL(x, y + 10, BLACK);
+      DRAW_PIXEL(x + 17, y + 10, BLACK);
+    }
+  }
+  else if (PatLast > s) {
+    uint8_t x = 28 + (s - PatDump1) * 14;
+    uint8_t y = 46;
+
+    if (g_blink_state)
+      DRAW_RECT(x, y, 15, 9, BLACK);
+    else {
+      DRAW_RECT(x, y, 15, 9, WHITE);
     }
   }
 }
@@ -691,7 +935,7 @@ void set_selector_pat(int8_t s) {
   if (g_blink_state)
     blink_indicator_pat(g_selector_pat);
   if (s >= PatLast)
-    s = PatLoadAll;
+    s = PatSave;
   if (s <= Pat1st)
     s = Pat01;
   g_selector_pat = s;
@@ -711,7 +955,7 @@ void up_released() {
     if (g_selector_pat == Pat1st)
       set_selector_pat(Pat01 + g_seq_cur);
     else
-      set_selector_pat(g_selector_pat - 4);
+      set_selector_pat(g_selector_pat - 4 -(g_selector_pat == PatSave));
     break;
   default:
     break;
@@ -814,6 +1058,7 @@ void init_globals() {
 void setup_sequence(struct Sequencer *s, const int8_t synth[], uint8_t t, int8_t o, const int8_t *song) {
   s->tempo = t;
   s->transpose = o;
+  s->flags = 0;
   for (uint8_t i = 0; i < 5; i++)
     s->synth_param[i] = synth[i];
   for (uint8_t i = 0; i < SEQ_LEN; i++)
@@ -826,20 +1071,20 @@ void setup_sequence(struct Sequencer *s, const int8_t synth[], uint8_t t, int8_t
 void setup_all_seq() {
   setup_sequence(&g_sequencer[0], preset_progs[0], 60, 0, song01);
   setup_sequence(&g_sequencer[1], preset_progs[0], 60, 0, song02);
-  setup_sequence(&g_sequencer[2], preset_progs[1], 96, 0, song01);
-  setup_sequence(&g_sequencer[3], preset_progs[1], 96, 0, song02);
-  setup_sequence(&g_sequencer[4], preset_progs[2], 96, 0, song01);
-  setup_sequence(&g_sequencer[5], preset_progs[2], 96, 0, song02);
-  setup_sequence(&g_sequencer[6], preset_progs[3], 96, 0, song01);
-  setup_sequence(&g_sequencer[7], preset_progs[3], 96, 0, song02);
-  setup_sequence(&g_sequencer[8], preset_progs[4], 96, 0, song01);
-  setup_sequence(&g_sequencer[9], preset_progs[4], 96, 0, song02);
-  setup_sequence(&g_sequencer[10], preset_progs[5], 96, -1, song10);
-  setup_sequence(&g_sequencer[11], preset_progs[5], 96, 0, song02);
-  setup_sequence(&g_sequencer[12], preset_progs[6], 120, -1, song12);
-  setup_sequence(&g_sequencer[13], preset_progs[6], 96, 0, song02);
-  setup_sequence(&g_sequencer[14], preset_progs[7], 130, -1, song14);
-  setup_sequence(&g_sequencer[15], preset_progs[7], 130, -1, song15);
+  setup_sequence(&g_sequencer[2], preset_progs[1], 96, 1, song03);
+  setup_sequence(&g_sequencer[3], preset_progs[1], 96, 1, song04);
+  setup_sequence(&g_sequencer[4], preset_progs[1], 96, 1, song05);
+  setup_sequence(&g_sequencer[5], preset_progs[2], 60, 0, song06);
+  setup_sequence(&g_sequencer[6], preset_progs[3], 180, 0, song07);
+  setup_sequence(&g_sequencer[7], preset_progs[3], 148, 0, song08);
+  setup_sequence(&g_sequencer[8], preset_progs[4], 76, 0, song09);
+  setup_sequence(&g_sequencer[9], preset_progs[4], 150, 0, song10);
+  setup_sequence(&g_sequencer[10], preset_progs[5], 140, -1, song11);
+  setup_sequence(&g_sequencer[11], preset_progs[5], 240, 0, song12);
+  setup_sequence(&g_sequencer[12], preset_progs[6], 120, -1, song13);
+  setup_sequence(&g_sequencer[13], preset_progs[6], 115, -1, song14);
+  setup_sequence(&g_sequencer[14], preset_progs[7], 130, -1, song15);
+  setup_sequence(&g_sequencer[15], preset_progs[7], 130, -1, song16);
 }
 
 void draw_seq_thumb(uint8_t x, uint8_t y, uint8_t s) {
@@ -882,7 +1127,6 @@ void draw_screen() {
     blink_indicator_seq(g_selector_seq);
     break;
   case Pattern:
-
     DRAW_RECT(25, 1, 77, 62, BLACK);
     DRAW_RECT(26, 2, 75, 60, BLACK);
     FILL_RECT(27, 3, 73, 58, WHITE);
@@ -896,8 +1140,8 @@ void draw_screen() {
         DRAW_PIXEL(x + 17, y + 10, BLACK);
         draw_seq_thumb(x, y, i + 4 * j);
       }
-    FILL_RECT(29, 48, 69, 12, BLACK);
-    DRAW_BITMAP(29, 48, panel, 69, 12, WHITE);
+    FILL_RECT(29, 48, 68, 12, BLACK);
+    DRAW_BITMAP(29, 48, panel, 68, 12, WHITE);
     break;
   }
 }
@@ -914,12 +1158,23 @@ void a_released() {
     case PatDumpAll:
     case PatLoad1:
     case PatLoadAll:
+      g_sequencer[g_seq_cur].playing = false;
+      g_mode = Communication;
+      g_command_com = g_selector_pat;
+      draw_communication();
+      break;
+    case PatSave:
+      write_eeprom();
+        read_eeprom();
+      g_mode = g_prev_mode;
+      draw_screen();
       break;
     default:
       g_seq_nxt = g_selector_pat - Pat01;
       if (!g_sequencer[g_seq_cur].playing) {
-        g_seq_cur = g_seq_nxt;
-        g_sequencer[g_seq_cur].playing = false;
+        finish_seq(&g_sequencer[g_seq_cur]);
+        g_sequencer[g_seq_cur].playing = true;
+        g_sequencer[g_seq_nxt].playing = false;
       }
       else {
         g_sequencer[g_seq_nxt].playing = true;
@@ -927,6 +1182,10 @@ void a_released() {
       g_mode = g_prev_mode;
       draw_screen();
     }
+    break;
+  case Communication:
+    g_mode = Pattern;
+    draw_screen();
     break;
   default:
     g_sequencer[g_seq_cur].playing = !g_sequencer[g_seq_cur].playing;
@@ -938,17 +1197,30 @@ void a_released() {
 
 void b_released() {
   g_keystat = { false, false, false, false, false, false, 0, 0, 0, 0 };
-  if (g_mode == Synthesizer) {
+  switch (g_mode) {
+  case Synthesizer:
     g_mode = Sequencer;
-  }
-  else {
+    draw_screen();
+    break;
+  case Sequencer:
     g_mode = Synthesizer;
+    draw_screen();
+    break;
+  case Pattern:
+    g_mode = g_prev_mode;
+    draw_screen();
+    break;
+  case Communication:
+    g_mode = Pattern;
+    draw_screen();
+    break;
+  default:
+    break;
   }
-  draw_screen();
 }
 
 void a_long_press() {
-  if (g_mode != Pattern) {
+  if ((g_mode == Synthesizer) || (g_mode == Sequencer)) {
     g_prev_mode = g_mode;
     g_mode = Pattern;
     g_selector_pat = Pat1st;
@@ -962,7 +1234,10 @@ void setup() {
 
   g_mode = Synthesizer;
   init_globals();
-  setup_all_seq();
+  if (KEY_PRESSED(A_BUTTON))
+    setup_all_seq();
+  else if (!read_eeprom())
+    setup_all_seq();
   g_seq_cur = 0;
   g_sequencer[g_seq_cur].playing = true;
 
@@ -985,7 +1260,6 @@ void loop() {
         seq_changed = true;
         prev_seq = g_seq_cur;
         g_sequencer[g_seq_cur].playing = false;
-        g_sequencer[g_seq_nxt].playing = true;
         g_sequencer[g_seq_nxt].pos = 0;
         g_sequencer[g_seq_nxt].prev = g_sequencer[g_seq_cur].prev;
         g_seq_cur = g_seq_nxt;
@@ -1025,6 +1299,7 @@ void loop() {
       if (g_sequencer[g_seq_cur].prev != g_sequencer[g_seq_cur].pos) {
         draw_seq_marker(&g_sequencer[g_seq_cur], g_sequencer[g_seq_cur].prev2);
         if (seq_changed) {
+          draw_seq_marker(&g_sequencer[prev_seq], g_sequencer[prev_seq].prev2);
           draw_sequencer_sliders(prev_seq);
           draw_sequencer_sliders(g_seq_cur);
           seq_changed = false;
@@ -1036,6 +1311,28 @@ void loop() {
         g_sequencer[g_seq_cur].prev2 = g_sequencer[g_seq_cur].prev;
         g_sequencer[g_seq_cur].prev = g_sequencer[g_seq_cur].pos;
         scrn_update = true;
+      }
+      break;
+    case Communication:
+      switch (g_command_com) {
+      case PatDump1:
+        dump_seq_one();
+        g_mode = g_prev_mode;
+        draw_screen();
+        scrn_update = true;
+        break;
+      case PatDumpAll:
+        dump_seq_all();
+        g_mode = g_prev_mode;
+        draw_screen();
+        scrn_update = true;
+        break;
+      case PatLoad1:
+        
+        break;
+      case PatLoadAll:
+        
+        break;
       }
       break;
     }
