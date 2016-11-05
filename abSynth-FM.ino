@@ -1,13 +1,20 @@
-//comment out #include "FMop.h"
-//#include "FMop.h"
+//uncomment this if using PROTON
+//#define __PROTON__
+
+#ifdef __PROTON__
+#include "FMop.h"
+#endif
 #include "notedefs.h"
 #include "FMSynth.h"
+#ifdef __PROTON__
+#include "Arduboy.h"
+Arduboy arduboy;
+#define DUR_UNIT (1000)
+#else
 #include "Arduboy2.h"
 Arduboy2 arduboy;
-
 #define DUR_UNIT (39136 / 2)
-//comment out DUR_UNIT (1000)
-//#define DUR_UNIT (1000)
+#endif
 
 #define DRAW_PIXEL(x,y,c)    arduboy.drawPixel((x), (y), (c));
 #define GET_PIXEL(x,y)      arduboy.getPixel((x), (y))
@@ -182,13 +189,13 @@ const uint8_t panel[] PROGMEM =
   //width = 68, height = 12
   0x7f, 0xe0, 0xee, 0xe0, 0xff, 0xe0, 0x71, 0x60, 0xff, 0xe0, 0x6a, 0xee, 0x7f, 0xff, 0x7f, 0xe0,
   0x7a, 0xe0, 0x7f, 0x60, 0x6f, 0xef, 0xff, 0xe0, 0xef, 0xef, 0x7f, 0xff, 0x7f, 0xe0, 0xee, 0xe0,
-  0xff, 0xe0, 0x71, 0xe0, 0xff, 0xe0, 0x6a, 0x6e, 0x7f, 0xff, 0x7f, 0x60, 0x7a, 0xe0, 0x7f, 0x60,
-  0xef, 0xef, 0xff, 0xe0, 0xef, 0xef, 0x7f, 0xff, 0xff, 0x68, 0xea, 0x62, 0xff, 0x60, 0x7a, 0x60,
-  0xff, 0x70, 0xef, 0x70, 0x0c, 0x0d, 0x0d, 0x0d, 0x0d, 0x0f, 0x00, 0x07, 0x08, 0x0f, 0x00, 0x07,
-  0x00, 0x0f, 0x00, 0x0c, 0x00, 0x0f, 0x00, 0x0d, 0x0c, 0x0f, 0x0d, 0x0d, 0x0d, 0x0d, 0x0c, 0x0f,
-  0x0c, 0x0d, 0x0d, 0x0d, 0x0d, 0x0f, 0x00, 0x07, 0x07, 0x0f, 0x00, 0x07, 0x00, 0x0f, 0x00, 0x0d,
-  0x00, 0x0f, 0x00, 0x07, 0x08, 0x0f, 0x0d, 0x0d, 0x0d, 0x0d, 0x0c, 0x0f, 0x0f, 0x00, 0x0c, 0x00,
-  0x0f, 0x00, 0x05, 0x05, 0x0f, 0x00, 0x0c, 0x00,
+  0xff, 0xe0, 0x71, 0x60, 0xff, 0xe0, 0x6a, 0x6e, 0x7f, 0xff, 0x7f, 0x60, 0x7a, 0xe0, 0x7f, 0xe0,
+  0x6f, 0xef, 0xff, 0xe0, 0xef, 0xef, 0x7f, 0xff, 0xff, 0x68, 0xea, 0x62, 0xff, 0x60, 0x7a, 0x60,
+  0xff, 0x70, 0xef, 0x70, 0xfc, 0xfd, 0xfd, 0xfd, 0xfd, 0xff, 0xf0, 0xf7, 0xf8, 0xff, 0xf0, 0xf7,
+  0xf0, 0xff, 0xf0, 0xfc, 0xf0, 0xff, 0xf0, 0xfd, 0xfc, 0xff, 0xfd, 0xfd, 0xfd, 0xfd, 0xfc, 0xff,
+  0xfc, 0xfd, 0xfd, 0xfd, 0xfd, 0xff, 0xf0, 0xfd, 0xf2, 0xff, 0xf0, 0xf5, 0xf5, 0xff, 0xf0, 0xf7,
+  0xf7, 0xff, 0xf8, 0xf7, 0xf8, 0xff, 0xfd, 0xfd, 0xfd, 0xfd, 0xfc, 0xff, 0xff, 0xf0, 0xfc, 0xf0,
+  0xff, 0xf0, 0xf5, 0xf5, 0xff, 0xf0, 0xfc, 0xf0,
 };
 
 const uint8_t cancelbutton[] PROGMEM =
@@ -224,7 +231,7 @@ const int8_t dial_y[32] PROGMEM =
 
 #define NUM_INST (8)
 
-const int8_t preset_progs[NUM_INST][5] = {
+const int8_t preset_progs[NUM_INST][5] PROGMEM = {
   //
   // +---- OP0 ----+  OP1
   // FB MULT  TL  DR  DR 
@@ -293,7 +300,7 @@ struct SynthNumericParam {
   uint8_t c_y;
 };
 
-struct SynthNumericParam g_params[5] =
+const struct SynthNumericParam g_params[5] PROGMEM =
 {
   { 7, 11, 21, 15, 41 },
   { 15, 35, 21, 39, 41 },
@@ -339,45 +346,45 @@ const int8_t song02[SEQ_LEN] PROGMEM =
 };
 const int8_t song03[SEQ_LEN] PROGMEM =
 {
-0x40, 0x40, 0x40, 0xFE, 
-0x40, 0x40, 0x40, 0xFE, 
-0x40, 0x43, 0x3C, 0x3E, 
-0x40, 0xFE, 0xFF, 0xFF,
+  0x40, 0x40, 0x40, 0xFE,
+  0x40, 0x40, 0x40, 0xFE,
+  0x40, 0x43, 0x3C, 0x3E,
+  0x40, 0xFE, 0xFF, 0xFF,
 };
 const int8_t song04[SEQ_LEN] PROGMEM =
 {
-0x41, 0x41, 0x41, 0x41, 
-0x41, 0x40, 0x40, 0x40, 
-0x40, 0x3E, 0x3E, 0x40, 
-0x3E, 0xFF, 0x43, 0xFE,
+  0x41, 0x41, 0x41, 0x41,
+  0x41, 0x40, 0x40, 0x40,
+  0x40, 0x3E, 0x3E, 0x40,
+  0x3E, 0xFF, 0x43, 0xFE,
 };
 const int8_t song05[SEQ_LEN] PROGMEM =
 {
-0x41, 0x41, 0x41, 0x41, 
-0x41, 0x40, 0x40, 0x40, 
-0x43, 0x43, 0x41, 0x3E, 
-0x3C, 0xFF, 0xFF, 0xFF
+  0x41, 0x41, 0x41, 0x41,
+  0x41, 0x40, 0x40, 0x40,
+  0x43, 0x43, 0x41, 0x3E,
+  0x3C, 0xFF, 0xFF, 0xFF
 };
 const int8_t song06[SEQ_LEN] PROGMEM =
 {
-0x40, 0x3C, 0x3E, 0x37, 
-0xFE, 0xFE, 0x37, 0x3E, 
-0x40, 0x3C, 0xFE, 0xFE, 
-0xFE, 0xFE, 0xFE, 0xFE
+  0x41, 0x45, 0x48, 0x4C,
+  0x41, 0x45, 0x47, 0x4A,
+  0x40, 0x43, 0x47, 0x4A,
+  0x40, 0x43, 0x45, 0x48
 };
 const int8_t song07[SEQ_LEN] PROGMEM =
 {
-0x43, 0x43, 0x43, 0x43, 
-0xFF, 0x46, 0x46, 0x46, 
-0x46, 0xFF, 0x46, 0x46, 
-0xFF, 0x46, 0x46, 0x46
+  0x43, 0x43, 0x43, 0x43,
+  0xFF, 0x46, 0x46, 0x46,
+  0x46, 0xFF, 0x46, 0x46,
+  0xFF, 0x46, 0x46, 0x46
 };
 const int8_t song08[SEQ_LEN] PROGMEM =
 {
-0x3C, 0x48, 0x3C, 0x45, 
-0x3C, 0x41, 0x3C, 0x43, 
-0x3C, 0x48, 0x3C, 0x4A, 
-0x3C, 0x47, 0x3C, 0x48
+  0x3C, 0x48, 0x3C, 0x45,
+  0x3C, 0x41, 0x3C, 0x43,
+  0x3C, 0x48, 0x3C, 0x4A,
+  0x3C, 0x47, 0x3C, 0x48
 };
 const int8_t song09[SEQ_LEN] PROGMEM =
 {
@@ -388,10 +395,10 @@ const int8_t song09[SEQ_LEN] PROGMEM =
 };
 const int8_t song10[SEQ_LEN] PROGMEM =
 {
-0x43, 0x43, 0x43, 0x43, 
-0x40, 0xFE, 0x40, 0xFE, 
-0x3E, 0xFE, 0x3E, 0xFE, 
-0x40, 0xFE, 0x40, 0xFE
+  0x3C, 0x48, 0x4B, 0x4A,
+  0x48, 0x46, 0x44, 0x43,
+  0x41, 0x3F, 0x3E, 0x3F,
+  0x3B, 0x3C, 0x3E, 0x37
 };
 const int8_t song11[SEQ_LEN] PROGMEM =
 {
@@ -402,10 +409,10 @@ const int8_t song11[SEQ_LEN] PROGMEM =
 };
 const int8_t song12[SEQ_LEN] PROGMEM =
 {
-0x3C, 0x3E, 0x40, 0x42, 
-0x44, 0x46, 0x48, 0x4A, 
-0x4C, 0x4A, 0x48, 0x46, 
-0x44, 0x42, 0x40, 0x3E
+  0x3C, 0x3E, 0x40, 0x42,
+  0x44, 0x46, 0x48, 0x4A,
+  0x4C, 0x4A, 0x48, 0x46,
+  0x44, 0x42, 0x40, 0x3E
 };
 const int8_t song13[SEQ_LEN] PROGMEM =
 {
@@ -416,10 +423,10 @@ const int8_t song13[SEQ_LEN] PROGMEM =
 };
 const int8_t song14[SEQ_LEN] PROGMEM =
 {
-0x3C, 0xFE, 0xFE, 0x3C, 
-0xFF, 0x37, 0x37, 0x37, 
-0x3C, 0xFE, 0xFE, 0x3C, 
-0xFF, 0xFF, 0x3C, 0x3F
+  0x3C, 0xFE, 0xFE, 0x3C,
+  0xFF, 0x37, 0x37, 0x37,
+  0x3C, 0xFE, 0xFE, 0x3C,
+  0xFF, 0xFF, 0x3C, 0x3F
 };
 const int8_t song15[SEQ_LEN] PROGMEM =
 {
@@ -430,18 +437,20 @@ const int8_t song15[SEQ_LEN] PROGMEM =
 };
 const int8_t song16[SEQ_LEN] PROGMEM =
 {
-0x34, 0xFF, 0x45, 0xFF, 
-0x34, 0xFF, 0x45, 0x34, 
-0xFF, 0x34, 0x45, 0x34, 
-0x45, 0x45, 0x34, 0x44
+  0x34, 0xFF, 0x45, 0xFF,
+  0x34, 0xFF, 0x45, 0x34,
+  0xFF, 0x34, 0x45, 0x34,
+  0x45, 0x45, 0x34, 0x44
 };
 
+#define SEQ_FLAGS_DEFAULT (0x80)
+
 struct Sequencer {
-  uint8_t synth_param[5];
-  int8_t notes[SEQ_LEN];
   uint8_t tempo = 120;
   int8_t transpose = 0;
-  uint8_t flags = 0x80; //reserved
+  uint8_t flags = SEQ_FLAGS_DEFAULT; //reserved
+  uint8_t synth_param[5];
+  int8_t notes[SEQ_LEN];
   uint8_t pos = 0;
   uint8_t prev = 0;
   uint8_t prev2 = 0;
@@ -467,7 +476,7 @@ FMop g_fm_operator[2];
 #define EEPROM_SIG  (EEPROM_TOP)
 #define EEPROM_VER  (EEPROM_TOP+4)
 #define EEPROM_NSEQ (EEPROM_TOP+5)
-#define EEPROM_PAT  (EEPROM_TOP+6)
+#define EEPROM_SEQ  (EEPROM_TOP+6)
 #define SIGNATURE "abFM"
 #define VERSION   (1)
 
@@ -488,7 +497,7 @@ void regulate_seq(struct Sequencer *s) {
   s->transpose = max(s->transpose, MINTRANSPOSE);
   s->transpose = min(s->transpose, MAXTRANSPOSE);
   for (uint8_t i = 0; i < 5; i++)
-    s->synth_param[i] = min(s->synth_param[i], g_params[i].max);
+    s->synth_param[i] = min(s->synth_param[i], pgm_read_byte(&g_params[i].max));
   for (uint8_t j = 0; j < SEQ_LEN; j++) {
     int8_t n = s->notes[j];
     if ((MINNOTE > n) && (n >= 0))
@@ -514,7 +523,7 @@ bool read_eeprom() {
   uint8_t nseq = EEPROM.read(EEPROM_NSEQ);
   if (nseq > SEQ_NUM) nseq = SEQ_NUM;
   for (uint8_t i = 0; i < nseq; i++)
-    read_seq_from_eeprom(&g_sequencer[i], EEPROM_PAT + i * EEPROM_SEQ_SIZE);
+    read_seq_from_eeprom(&g_sequencer[i], EEPROM_SEQ + i * EEPROM_SEQ_SIZE);
   return true;
 }
 
@@ -531,8 +540,20 @@ void write_eeprom() {
   EEPROM.update(EEPROM_VER, VERSION);
   EEPROM.update(EEPROM_NSEQ, SEQ_NUM);
   for (uint8_t i = 0; i < SEQ_NUM; i++)
-    write_seq_to_eeprom(&g_sequencer[i], EEPROM_PAT + i * EEPROM_SEQ_SIZE);
+    write_seq_to_eeprom(&g_sequencer[i], EEPROM_SEQ + i * EEPROM_SEQ_SIZE);
 }
+
+#define COMM_CLOSED   0
+#define COMM_OPEN   1
+#define COMM_CONNECTED  2
+#define COMM_READNUM  11
+#define COMM_READNL   13
+#define NOTE_END_MARK (0x80)
+//note end mark position is just after tempo(1)+transpose(1)+flags(1)
+// + synth_params[5]+ notes[SEQ_LEN]
+#define END_MARK_POS  (8 + SEQ_LEN) 
+
+uint8_t g_comm_state;
 
 void draw_communication() {
   DRAW_RECT(39, 19, 49, 23, BLACK);
@@ -544,11 +565,14 @@ void draw_communication() {
 }
 
 void serial_print_hex_2(uint8_t n) {
+#ifndef __PROTON__
   if (n < 0x10)
-    Serial.print("0");
+    Serial.print(F("0"));
   Serial.print(n, HEX);
-  Serial.print(" ");
+  Serial.print(F(" "));
+#endif
 }
+
 void dump_seq_header(uint8_t nseq) {
   serial_print_hex_2(SIGNATURE[0]);
   serial_print_hex_2(SIGNATURE[1]);
@@ -561,30 +585,340 @@ void dump_seq_header(uint8_t nseq) {
 void dump_seq_to_serial(struct Sequencer *s) {
   for (uint8_t i = 0; i < EEPROM_SEQ_SIZE; i++)
     serial_print_hex_2(*((byte *)s + i));
+  serial_print_hex_2(NOTE_END_MARK);
 }
 
-void dump_seq_one() {
-  Serial.begin(9600);
-  while(!Serial);
-  dump_seq_header(1);
-  Serial.println();
-  dump_seq_to_serial(&g_sequencer[g_seq_cur]);
-  Serial.println();
-  Serial.end();
-}
-
-void dump_seq_all() {
-  Serial.begin(9600);
-  while(!Serial);
-  dump_seq_header(SEQ_NUM);
-  Serial.println();
-  for(uint8_t i = 0; i < SEQ_NUM; i++) {
-    dump_seq_to_serial(&g_sequencer[i]);
+bool dump_seq(bool all) {
+  bool result = false;
+  switch (g_comm_state) {
+  case COMM_CLOSED:
+#ifndef __PROTON__
+    Serial.begin(9600);
+#endif
+    g_comm_state = COMM_OPEN;
+    break;
+  case COMM_OPEN:
+#ifndef __PROTON__
+    if (Serial)
+#endif
+      g_comm_state = COMM_CONNECTED;
+    break;
+  case COMM_CONNECTED:
+    dump_seq_header(all ? 16 : 1);
+#ifndef __PROTON__
     Serial.println();
+#endif
+    if (all) {
+      for (uint8_t i = 0; i < SEQ_NUM; i++) {
+#ifndef __PROTON__
+        if (i == 0)
+          Serial.println(F("#Sequence 1-8"));
+        else if (i == 8)
+          Serial.println(F("#Sequence 9-16"));
+#endif
+        dump_seq_to_serial(&g_sequencer[i]);
+#ifndef __PROTON__
+        Serial.println();
+#endif
+      }
+    }
+    else {
+      dump_seq_to_serial(&g_sequencer[g_seq_cur]);
+#ifndef __PROTON__
+      Serial.println();
+#endif
+    }
+#ifndef __PROTON__
+    Serial.end();
+#endif
+    g_comm_state = COMM_CLOSED;
+    result = true;
+    break;
+  default:
+    break;
   }
-  Serial.end();
+  return result;
 }
 
+
+struct Parser {
+  int8_t state;
+  int8_t num1st;
+  int8_t num2nd;
+  int16_t count;
+  bool err;
+  int8_t nseq;
+  struct Sequencer seq;
+  int8_t seq_offset;
+  int8_t seq_count;
+}g_parser;
+
+#define TOKEN_WAIT_NEXT 0
+#define TOKEN_READING 1
+#define TOKEN_COMMENT 2
+#define CHR_TO_NUM(c) (((c) > '9') ? (c) - 'A' + 10 : (c) - '0')
+
+bool recv_token(char ch) {
+  bool result = false; // true if a token has been received
+
+  if (('a' <= ch) && (ch <= 'f'))
+    ch = ch - 0x20;
+
+  if (g_parser.state == TOKEN_COMMENT) {
+    if ((ch == '\n') || (ch == '\r'))
+      g_parser.state = TOKEN_WAIT_NEXT;
+  }
+  else if (ch == '#') {
+    g_parser.state = TOKEN_COMMENT;
+    if (g_parser.state == TOKEN_READING)
+      result = true;
+  }
+  else if ((('0' <= ch) && (ch <= '9')) ||
+    (('A' <= ch) && (ch <= 'F'))) {
+    switch (g_parser.state) {
+    case TOKEN_WAIT_NEXT:
+      g_parser.state = TOKEN_READING;
+      g_parser.num2nd = 0;
+    case TOKEN_READING:
+      g_parser.num1st = g_parser.num2nd;
+      g_parser.num2nd = CHR_TO_NUM(ch);
+      break;
+    }
+  }
+  else if ((ch == ' ') ||
+    (ch == '\n') ||
+    (ch == '\r')) {
+    switch (g_parser.state) {
+    case TOKEN_WAIT_NEXT:
+      break;;
+    case TOKEN_READING:
+      result = true;
+      g_parser.state = TOKEN_WAIT_NEXT;
+      break;
+    default: //ERROR
+      g_parser.err = true;
+      result = true;
+      break;
+    }
+  }
+  return result;
+}
+
+bool recv_seq_header(char ch) {
+  bool result = false; //true if header has been received
+
+  if (recv_token(ch)) {
+    uint8_t c = ((g_parser.num1st << 4) | g_parser.num2nd);
+#ifndef __PROTON__
+    Serial.print(c, HEX);
+    Serial.print(F(" "));
+#endif
+    switch (g_parser.count) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+      if (c != SIGNATURE[g_parser.count]) {
+        g_parser.err = true;
+        result = true;
+      }
+      break;
+    case 4:
+      if (c < VERSION) {
+        g_parser.err = true;
+        result = true;
+      }
+      break;
+    case 5:
+      g_parser.nseq = c;
+      g_parser.err = false;
+      result = true;
+      break;
+    default:
+      break;
+    }
+    g_parser.count++;
+  }
+  return result;
+}
+
+bool recv_seq_body(char ch) {
+  bool result = false; //true if one sequence has been received
+  uint8_t *p = (uint8_t *)&g_parser.seq;
+
+  if (recv_token(ch)) {
+    uint8_t c = ((g_parser.num1st << 4) | g_parser.num2nd);
+#ifndef __PROTON__
+    Serial.print(c, HEX);
+    Serial.print(F(" "));
+#endif
+    switch (g_parser.seq_offset) {
+    case 0:
+      if ((c > MAXTEMPO) || (c < MINTEMPO)) {
+        g_parser.err = true;
+        result = true;
+      }
+      break;
+    case 1:
+      if ((((int8_t)c) > MAXTRANSPOSE) || (((int8_t)c) < MINTRANSPOSE)) {
+        g_parser.err = true;
+        result = true;
+      }
+      break;
+    case 2:
+      if (c != SEQ_FLAGS_DEFAULT) {
+        g_parser.err = true;
+        result = true;
+      }
+      break;
+    case END_MARK_POS:
+      if (c == NOTE_END_MARK) {
+        result = true;
+#ifndef __PROTON__
+        Serial.print(F("\r\n1 sequence received.\r\n"));
+#endif
+      }
+      break;
+    default:
+      break;
+    }
+    if (!result)
+      *(p + g_parser.seq_offset++) = c;
+    g_parser.count++;
+  }
+  return result;
+}
+
+void copy_seq(struct Sequencer *s1, const struct Sequencer *s2) {
+  s1->tempo = s2->tempo;
+  s1->transpose = s2->transpose;
+  s1->flags = s2->flags;
+  for (uint8_t i = 0; i < 5; i++)
+    s1->synth_param[i] = s2->synth_param[i];
+  for (uint8_t i = 0; i < SEQ_LEN; i++)
+    s1->notes[i] = s2->notes[i];
+  s1->playing = false;
+}
+
+bool recv_seq(bool all) {
+  bool result = false;  // true if done receiving sequences 
+  char ch;
+
+#ifdef __PROTON__
+  static char dummy1[] = "#\r\n61 62 46 4D 01 01 4A FF 80 05 09 20 02 02 41 45 48 4C 41 45 47 4A 40 43 47 4A 40 43 45 48 80 ";
+  static char dummy2[] = "#\r\n61 62 46 4D 01 10 \r\n"
+    "3C 00 80 05 02 1B 01 02 43 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 80\r\n"
+    "3C 00 80 05 02 1B 01 02 3C 43 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 80\r\n"
+    "3C 00 80 05 02 1B 01 02 3C 3C 43 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 80\r\n"
+    "3C 00 80 05 02 1B 01 02 3C 3C 3C 43 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 80\r\n"
+    "3C 00 80 05 02 1B 01 02 3C 3C 3C 3C 43 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 80\r\n"
+    "3C 00 80 05 02 1B 01 02 3C 3C 3C 3C 3C 43 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 80\r\n"
+    "3C 00 80 05 02 1B 01 02 3C 3C 3C 3C 3C 3C 43 3C 3C 3C 3C 3C 3C 3C 3C 3C 80\r\n"
+    "3C 00 80 05 02 1B 01 02 3C 3C 3C 3C 3C 3C 3C 43 3C 3C 3C 3C 3C 3C 3C 3C 80\r\n"
+    "3C 00 80 05 02 1B 01 02 3C 3C 3C 3C 3C 3C 3C 3C 43 3C 3C 3C 3C 3C 3C 3C 80\r\n"
+    "3C 00 80 05 02 1B 01 02 3C 3C 3C 3C 3C 3C 3C 3C 3C 43 3C 3C 3C 3C 3C 3C 80\r\n"
+    "3C 00 80 05 02 1B 01 02 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 43 3C 3C 3C 3C 3C 80\r\n"
+    "3C 00 80 05 02 1B 01 02 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 43 3C 3C 3C 3C 80\r\n"
+    "3C 00 80 05 02 1B 01 02 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 43 3C 3C 3C 80\r\n"
+    "3C 00 80 05 02 1B 01 02 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 43 3C 3C 80\r\n"
+    "3C 00 80 05 02 1B 01 02 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 43 3C 80\r\n"
+    "3C 00 80 05 02 1B 01 02 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 3C 43 80\r\n";
+  static int16_t dummycount;
+  static uint8_t *dummy;
+  static int16_t dummysize;
+#endif
+  switch (g_comm_state) {
+  case COMM_CLOSED:
+#ifndef __PROTON__
+    Serial.begin(9600);
+#endif
+    g_comm_state = COMM_OPEN;
+    break;
+  case COMM_OPEN:
+#ifndef __PROTON__
+    if (Serial)
+#endif
+    {
+#ifndef __PROTON__
+      Serial.print(F("send sequences\r\n"));
+#endif
+      g_comm_state = COMM_CONNECTED;
+      g_parser.state = TOKEN_WAIT_NEXT;
+      g_parser.count = 0;
+      g_parser.err = false;
+      g_parser.seq_count = 0;
+#ifdef __PROTON__
+      dummycount = 0;
+#endif
+    }
+    break;
+  case COMM_CONNECTED:
+#ifndef __PROTON__
+    while (Serial.available() && (g_comm_state == COMM_CONNECTED)) {
+      ch = Serial.read();
+#else
+    if (!all) {
+      dummy = (uint8_t *)dummy1;
+      dummysize = sizeof(dummy1);
+    }
+    else {
+      dummy = (uint8_t *)dummy2;
+      dummysize = sizeof(dummy2);
+    }
+    while (dummycount < dummysize) {
+      ch = dummy[dummycount++];
+#endif
+      if (g_parser.count < 5)
+        result = recv_seq_header(ch); // if header is correct, return value is false
+      else if (g_parser.count == 5) {
+        result = recv_seq_header(ch) || g_parser.err;
+        if (result && (g_parser.count == 6)) {
+          result = false;
+          g_parser.seq_offset = 0;
+#ifndef __PROTON__
+          Serial.print(F("\r\nheader is OK\r\n"));
+#endif
+        }
+      }
+      else {
+        if (recv_seq_body(ch) && !g_parser.err) {
+          if (all) {
+            copy_seq(&g_sequencer[g_parser.seq_count], &g_parser.seq);
+            if (++g_parser.seq_count >= g_parser.nseq)
+              result = true;
+            else
+              g_parser.seq_offset = 0;
+          }
+          else {
+            copy_seq(&g_sequencer[g_seq_cur], &g_parser.seq);
+            result = true;
+          }
+        }
+        if (g_parser.err) {
+#ifndef __PROTON__
+          Serial.print(F("\r\error at position "));
+          Serial.print(g_parser.count, DEC);
+          Serial.println();
+#endif
+          result = true;
+        }
+        if (result) {
+#ifndef __PROTON__
+          Serial.print(F("\r\ndone.\r\n"));
+          Serial.end();
+#else
+          dummycount = dummysize;
+#endif
+          g_comm_state = COMM_CLOSED;
+        }
+      }
+    }
+    break;
+  default:
+    break;
+    }
+  return result;
+  }
 
 void blink_indicator_syn(uint8_t s) {
   g_blink_state = !g_blink_state;
@@ -599,8 +933,8 @@ void blink_indicator_syn(uint8_t s) {
 void copy_param_to_synth(FMop op[2]) {
   uint8_t *p = g_sequencer[g_seq_cur].synth_param;
   for (uint8_t i = 0; i < 5; i++) {
-    if (p[i] > g_params[i].max) {
-      p[i] = g_params[i].max;
+    if (p[i] > pgm_read_byte(&g_params[i].max)) {
+      p[i] = pgm_read_byte(&g_params[i].max);
     }
   }
   op[0].FB = p[0];
@@ -610,22 +944,22 @@ void copy_param_to_synth(FMop op[2]) {
   op[1].DR = p[4];
 }
 
-void draw_dial(uint8_t value, struct SynthNumericParam *p, uint8_t color) {
+void draw_dial(uint8_t value, const struct SynthNumericParam *p, uint8_t color) {
   long v;
   v = value;
-  v = 31 * v / p->max;
+  v = 31 * v / pgm_read_byte(&p->max);
   int8_t dx = pgm_read_byte(&dial_x[v]);
   int8_t dy = pgm_read_byte(&dial_y[v]);
-  DRAW_LINE(p->c_x, p->c_y, p->c_x + dx, p->c_y + dy, color);
+  DRAW_LINE(pgm_read_byte(&p->c_x), pgm_read_byte(&p->c_y), pgm_read_byte(&p->c_x) + dx, pgm_read_byte(&p->c_y) + dy, color);
 }
 
-void set_param(uint8_t *value, struct SynthNumericParam *p, int8_t v) {
+void set_param(uint8_t *value, const struct SynthNumericParam *p, int8_t v) {
   draw_dial(*value, p, BLACK);
   if (v < 0) v = 0;
-  if (v > p->max) v = p->max;
+  if (v > pgm_read_byte(&p->max)) v = pgm_read_byte(&p->max);
   *value = v;
-  FILL_RECT(p->x, p->y, 12, 7, WHITE);
-  draw_2digit(p->x, p->y, v, BLACK);
+  FILL_RECT(pgm_read_byte(&p->x), pgm_read_byte(&p->y), 12, 7, WHITE);
+  draw_2digit(pgm_read_byte(&p->x), pgm_read_byte(&p->y), v, BLACK);
   copy_param_to_synth(g_fm_operator);
   draw_dial(v, p, WHITE);
 }
@@ -638,7 +972,7 @@ void set_program(int8_t p) {
   draw_string(15, 5, progname[p], BLACK);
   uint8_t *param = g_sequencer[g_seq_cur].synth_param;
   for (uint8_t i = 0; i < 5; i++) {
-    set_param(param + i, &g_params[i], preset_progs[p][i]);
+    set_param(param + i, &g_params[i], pgm_read_byte(&preset_progs[p][i]));
   }
 }
 
@@ -955,7 +1289,7 @@ void up_released() {
     if (g_selector_pat == Pat1st)
       set_selector_pat(Pat01 + g_seq_cur);
     else
-      set_selector_pat(g_selector_pat - 4 -(g_selector_pat == PatSave));
+      set_selector_pat(g_selector_pat - 4 - (g_selector_pat == PatSave));
     break;
   default:
     break;
@@ -1060,7 +1394,7 @@ void setup_sequence(struct Sequencer *s, const int8_t synth[], uint8_t t, int8_t
   s->transpose = o;
   s->flags = 0;
   for (uint8_t i = 0; i < 5; i++)
-    s->synth_param[i] = synth[i];
+    s->synth_param[i] = pgm_read_byte(&synth[i]);
   for (uint8_t i = 0; i < SEQ_LEN; i++)
     s->notes[i] = pgm_read_byte(song + i);
   s->dur_cnt = 0;
@@ -1074,12 +1408,12 @@ void setup_all_seq() {
   setup_sequence(&g_sequencer[2], preset_progs[1], 96, 1, song03);
   setup_sequence(&g_sequencer[3], preset_progs[1], 96, 1, song04);
   setup_sequence(&g_sequencer[4], preset_progs[1], 96, 1, song05);
-  setup_sequence(&g_sequencer[5], preset_progs[2], 60, 0, song06);
-  setup_sequence(&g_sequencer[6], preset_progs[3], 180, 0, song07);
+  setup_sequence(&g_sequencer[5], preset_progs[2], 74, -1, song06);
+  setup_sequence(&g_sequencer[6], preset_progs[3], 192, 0, song07);
   setup_sequence(&g_sequencer[7], preset_progs[3], 148, 0, song08);
   setup_sequence(&g_sequencer[8], preset_progs[4], 76, 0, song09);
-  setup_sequence(&g_sequencer[9], preset_progs[4], 150, 0, song10);
-  setup_sequence(&g_sequencer[10], preset_progs[5], 140, -1, song11);
+  setup_sequence(&g_sequencer[9], preset_progs[4], 126, 0, song10);
+  setup_sequence(&g_sequencer[10], preset_progs[5], 130, -1, song11);
   setup_sequence(&g_sequencer[11], preset_progs[5], 240, 0, song12);
   setup_sequence(&g_sequencer[12], preset_progs[6], 120, -1, song13);
   setup_sequence(&g_sequencer[13], preset_progs[6], 115, -1, song14);
@@ -1151,7 +1485,7 @@ void a_released() {
   case Pattern:
     switch (g_selector_pat) {
     case Pat1st:
-      g_selector_pat = Pat01;
+      g_selector_pat = Pat01 + g_seq_cur;
       blink_indicator_pat(g_selector_pat);
       break;
     case PatDump1:
@@ -1161,11 +1495,12 @@ void a_released() {
       g_sequencer[g_seq_cur].playing = false;
       g_mode = Communication;
       g_command_com = g_selector_pat;
+      g_comm_state = COMM_CLOSED;
       draw_communication();
       break;
     case PatSave:
       write_eeprom();
-        read_eeprom();
+      read_eeprom();
       g_mode = g_prev_mode;
       draw_screen();
       break;
@@ -1184,6 +1519,12 @@ void a_released() {
     }
     break;
   case Communication:
+#ifndef __PROTON__
+    Serial.println();
+    Serial.print(g_parser.count, DEC);
+    Serial.print(F(" bytes received.\r\naborted."));
+    Serial.end();
+#endif
     g_mode = Pattern;
     draw_screen();
     break;
@@ -1211,6 +1552,12 @@ void b_released() {
     draw_screen();
     break;
   case Communication:
+#ifndef __PROTON__
+    Serial.println();
+    Serial.print(g_parser.count, DEC);
+    Serial.print(F(" bytes received.\r\naborted."));
+    Serial.end();
+#endif
     g_mode = Pattern;
     draw_screen();
     break;
@@ -1300,8 +1647,10 @@ void loop() {
         draw_seq_marker(&g_sequencer[g_seq_cur], g_sequencer[g_seq_cur].prev2);
         if (seq_changed) {
           draw_seq_marker(&g_sequencer[prev_seq], g_sequencer[prev_seq].prev2);
-          draw_sequencer_sliders(prev_seq);
-          draw_sequencer_sliders(g_seq_cur);
+          if (prev_seq != g_seq_cur) {
+            draw_sequencer_sliders(prev_seq);
+            draw_sequencer_sliders(g_seq_cur);
+          }
           seq_changed = false;
           change_tempo(0);
           draw_seq_marker(&g_sequencer[g_seq_cur], g_sequencer[g_seq_cur].prev2);
@@ -1316,22 +1665,36 @@ void loop() {
     case Communication:
       switch (g_command_com) {
       case PatDump1:
-        dump_seq_one();
-        g_mode = g_prev_mode;
-        draw_screen();
-        scrn_update = true;
+        if (dump_seq(false)) {
+          g_mode = g_prev_mode;
+          draw_screen();
+          scrn_update = true;
+        }
         break;
       case PatDumpAll:
-        dump_seq_all();
-        g_mode = g_prev_mode;
-        draw_screen();
-        scrn_update = true;
+        if (dump_seq(true)) {
+          g_mode = g_prev_mode;
+          draw_screen();
+          scrn_update = true;
+        }
         break;
       case PatLoad1:
-        
+        if (recv_seq(false)) {
+          g_mode = g_prev_mode;
+          draw_screen();
+          scrn_update = true;
+          if (g_mode != Synthesizer)
+            copy_param_to_synth(g_fm_operator);
+        }
         break;
       case PatLoadAll:
-        
+        if (recv_seq(true)) {
+          g_mode = g_prev_mode;
+          draw_screen();
+          scrn_update = true;
+          if (g_mode != Synthesizer)
+            copy_param_to_synth(g_fm_operator);
+        }
         break;
       }
       break;

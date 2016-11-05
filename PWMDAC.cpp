@@ -13,7 +13,7 @@
 #include <inttypes.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
-#include <Wiring_private.h>
+#include <wiring_private.h>
 #include "PWMDAC.h"
 
 #define cbi16(sfr, bit) (_SFR_WORD(sfr) &= ~_BV(bit))
