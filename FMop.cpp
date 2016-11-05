@@ -81,3 +81,9 @@ int16_t FMop::calc(int32_t mod_in)
   } // if (0x ...
     return(op_out); 
 } // int16_t FMop::calc()
+
+void FMop::mute(void)
+{
+  eg_acc = EG_MIN_VAL;
+}
+
