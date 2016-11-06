@@ -21,7 +21,7 @@
 // PWM DAC pin define
 //
 #define PWMDAC_PIN (13)
-//
+#define PWMDAC_PIN2 (5)//
 // sample update timing flag
 //
 extern volatile uint8_t fsflag;

@@ -39,6 +39,7 @@ void PWMDAC_setup(uint8_t PWM_mode)
 {
 //  modify Timer1 PWM setting
   pinMode(PWMDAC_PIN,OUTPUT);
+  pinMode(PWMDAC_PIN2,OUTPUT);
  // analogWrite(PWMDAC_PIN, 256); // enable PWM output
 /* 2009/6/29 changed
   TCCR1B  = 0x09; // 1/1 clk (16 MHz)
