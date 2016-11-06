@@ -41,7 +41,7 @@ Data starts with a header section followd by a series of sequence section.
 |Flags(reserved) |uint8_t   |128    |
 |Synth parameters|uint8_t[5]|0..255 |
 |Notes           |int8_t[16]|(below)|
-|End mark        |int8_t    |128    |
+|End mark        |uint8_t   |128    |
 
 ## Note data
 
