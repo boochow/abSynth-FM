@@ -22,6 +22,8 @@ Delimiters are newline, return, or space.
 
 All characters from '#' to the end of line are ignored. You can use '#' to include comments in the data.
 
+Data starts with a header section followd by a series of sequence section.
+
 ## Header section
 
 |field           |type      |value  |
