@@ -28,7 +28,7 @@ Data starts with a header section followd by a series of sequence section.
 
 |field           |type      |value  |
 |----------------|----------|-------|
-|Signature       |uint8_t[4]|abFM   |
+|Signature       |uint8_t[4]|'abFM' |
 |Version         |uint8_t   |1      |
 |Num of Sequences|uint8_t   |1 or 16|
 
