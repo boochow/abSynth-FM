@@ -37,7 +37,7 @@ Data starts with a header section followd by a series of sequence section.
 |field           |type      |value  |
 |----------------|----------|-------|
 |Tempo           |uint8_t   |56..240|
-|Transpose       |int8_t    |1-2..+2|
+|Transpose       |int8_t    |-2..+2 |
 |Flags(reserved) |uint8_t   |128    |
 |Synth parameters|uint8_t[5]|0..255 |
 |Notes           |int8_t[16]|(below)|
