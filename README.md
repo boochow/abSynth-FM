@@ -1,7 +1,7 @@
 # abSynth-FM
 FM Synthesizer with step sequencer for Arduboy.
 
-Mr. pcm1723's FM Synthesis engine in [FMMelody](http://www.geocities.jp/pcm1723/html/fmmelody.htm) is used.
+The FM Synthesis engine is derived from [FMMelody](http://pcm1723.g3.xrea.com/html/fmmelody.htm).
 # Installation
 You need [Arduboy2 Library](https://github.com/MLXXXp/Arduboy2).
 
@@ -12,7 +12,7 @@ See this video.
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=x0wAuAnk9Uw" target="_blank"><img src="http://img.youtube.com/vi/x0wAuAnk9Uw/0.jpg" alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
 
-#Data format of serial port communication
+# Sequencer data format (send/receive via serial port)
 
 ## Syntax
 
@@ -20,7 +20,7 @@ A series of bytes in hexadecimal digits, separated with delimiters.
 
 Delimiters are newline, return, or space.
 
-All characters from '#' to the end of line are ignored. You can use '#' to include comments in the data.
+All characters from '#' to the end of line are ignored. You can use '#' to include comments in your data.
 
 Data starts with a header section followd by a series of sequence section.
 
